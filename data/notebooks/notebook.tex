@@ -1,0 +1,1230 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{atividade\_spark-allanfarias}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{SparkSession}\PY{p}{,} \PY{n}{dataframe}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{when}\PY{p}{,} \PY{n}{col}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{,} \PY{n}{count}\PY{p}{,} \PY{n}{isnan}\PY{p}{,} \PY{n+nb}{round}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{regexp\PYZus{}replace}\PY{p}{,} \PY{n}{concat\PYZus{}ws}\PY{p}{,} \PY{n}{sha2}\PY{p}{,} \PY{n}{rtrim}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{unix\PYZus{}timestamp}\PY{p}{,} \PY{n}{from\PYZus{}unixtime}\PY{p}{,} \PY{n}{to\PYZus{}date}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{StructType}\PY{p}{,} \PY{n}{StructField}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{DoubleType}\PY{p}{,} \PY{n}{IntegerType}\PY{p}{,} \PY{n}{StringType}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{HiveContext}
+        
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{regexp\PYZus{}replace}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{when}
+        
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{to\PYZus{}date}\PY{p}{,} \PY{n}{date\PYZus{}format} \PY{c+c1}{\PYZsh{}adicionei para formatar a tabela pedido}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{countDistinct} \PY{c+c1}{\PYZsh{}adicionei para fazer a contagem de maneira distinta}
+        
+        \PY{n}{spark} \PY{o}{=} \PY{n}{SparkSession}\PY{o}{.}\PY{n}{builder}\PY{o}{.}\PY{n}{master}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{local[*]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PYZbs{}
+            \PY{o}{.}\PY{n}{enableHiveSupport}\PY{p}{(}\PY{p}{)}\PYZbs{}
+            \PY{o}{.}\PY{n}{getOrCreate}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{01.Criar dataframes das tabelas que estão no
+hive}\label{criar-dataframes-das-tabelas-que-estuxe3o-no-hive}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Tabela Categorias}
+        \PY{n}{df\PYZus{}categorias} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                    SELECT *}
+        \PY{l+s+s2}{                    FROM desafio.categorias}
+        \PY{l+s+s2}{                    WHERE id\PYZus{}categoria != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}categoria}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}categorias}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++------------+---------------+-------------+
+|id\_categoria|   ds\_categoria|perc\_parceiro|
++------------+---------------+-------------+
+|           1|Categoria - 001|          2.0|
+|           2|Categoria - 002|          2.0|
+|           3|Categoria - 003|          2.0|
+|           4|Categoria - 004|          2.0|
+|           5|Categoria - 005|          5.0|
+|           6|Categoria - 006|          1.0|
+|           7|Categoria - 007|          5.0|
+|           8|Categoria - 008|          3.0|
+|           9|Categoria - 009|          5.0|
+|          10|Categoria - 010|          6.0|
+|          11|Categoria - 011|          6.0|
+|          12|Categoria - 012|          4.0|
+|          13|Categoria - 013|          3.0|
+|          14|Categoria - 014|          1.0|
+|          15|Categoria - 015|          4.0|
+|          16|Categoria - 016|          3.0|
+|          17|Categoria - 017|          5.0|
+|          18|Categoria - 018|          1.0|
+|          19|Categoria - 019|          2.0|
+|          20|Categoria - 020|          5.0|
++------------+---------------+-------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Tabela cidade}
+        \PY{n}{df\PYZus{}cidade} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                SELECT *}
+        \PY{l+s+s2}{                FROM desafio.cidade}
+        \PY{l+s+s2}{                WHERE id\PYZus{}cidade != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}cidade}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}cidade}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+----------------+---------+
+|id\_cidade|       ds\_cidade|id\_estado|
++---------+----------------+---------+
+|     1058|           Betim|        1|
+|       33|      ACRELANDIA|        2|
+|      485|    ASSIS BRASIL|        2|
+|      958|       BRASILEIA|        2|
+|     1388|        CAPIXABA|        2|
+|     1851| CRUZEIRO DO SUL|        2|
+|     2022|       Cravinhos|        2|
+|     2232|  EPITACIOLANDIA|        2|
+|     2347|           FEIJO|        2|
+|     3879|     MANCIO LIMA|        2|
+|     3895|   MANOEL URBANO|        2|
+|     5628|      RIO BRANCO|        2|
+|     5767|      Rio Branco|        2|
+|     6585|  SENA MADUREIRA|        2|
+|     6593|SENADOR GUIOMARD|        2|
+|     6845|       SÃO PAULO|        2|
+|     6987|        TARAUACA|        2|
+|     7241|      UBERLANDIA|        2|
+|     7535|          XAPURI|        2|
+|       59|     AGUA BRANCA|        3|
++---------+----------------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Tabela estado}
+        \PY{n}{df\PYZus{}estado} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                SELECT *}
+        \PY{l+s+s2}{                FROM desafio.estado}
+        \PY{l+s+s2}{                WHERE id\PYZus{}estado != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}estado}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}estado}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+---------+
+|id\_estado|ds\_estado|
++---------+---------+
+|        1|       31|
+|        2|       AC|
+|        3|       AL|
+|        4|       AM|
+|        5|       AP|
+|        6|       BA|
+|        7|       CE|
+|        8|       DF|
+|        9|       Df|
+|       10|       ES|
+|       11|       GO|
+|       12|       Go|
+|       13|       MA|
+|       14|       MG|
+|       15|       MS|
+|       16|       MT|
+|       17|       Mg|
+|       18|       PA|
+|       19|       PB|
+|       20|       PE|
++---------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Tabela clientes}
+        \PY{n}{df\PYZus{}clientes} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                    SELECT *}
+        \PY{l+s+s2}{                    FROM desafio.clientes}
+        \PY{l+s+s2}{                    WHERE id\PYZus{}cliente != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}cliente}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}clientes}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+--------------------+---------+
+|id\_cliente|          nm\_cliente|flag\_ouro|
++----------+--------------------+---------+
+|  78262350|Cliente Magalu - {\ldots}|        0|
+|  57301020|Cliente Magalu - {\ldots}|        0|
+|   4639167|Cliente Magalu - {\ldots}|        1|
+|  53130287|Cliente Magalu - {\ldots}|        0|
+|  16456085|Cliente Magalu - {\ldots}|        0|
+| 124100202|Cliente Magalu - {\ldots}|        0|
+|  15659567|Cliente Magalu - {\ldots}|        0|
+|  37375617|Cliente Magalu - {\ldots}|        1|
+|  52082515|Cliente Magalu - {\ldots}|        0|
+|  56214875|Cliente Magalu - {\ldots}|        0|
+| 137980527|Cliente Magalu - {\ldots}|        0|
+|  11806492|Cliente Magalu - {\ldots}|        0|
+| 112690290|Cliente Magalu - {\ldots}|        1|
+| 120559842|Cliente Magalu - {\ldots}|        1|
+| 140697495|Cliente Magalu - {\ldots}|        0|
+|  64431627|Cliente Magalu - {\ldots}|        0|
+| 113852445|Cliente Magalu - {\ldots}|        1|
+|  51864985|Cliente Magalu - {\ldots}|        0|
+| 113068442|Cliente Magalu - {\ldots}|        0|
+|  71256730|Cliente Magalu - {\ldots}|        0|
++----------+--------------------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Tabela filial}
+        \PY{n}{df\PYZus{}filial} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                SELECT *}
+        \PY{l+s+s2}{                FROM desafio.filial}
+        \PY{l+s+s2}{                WHERE id\PYZus{}filial != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}filial}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}filial}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+---------------+---------+
+|id\_filial|      ds\_filial|id\_cidade|
++---------+---------------+---------+
+|        6|Filial - 000006|       22|
+|        9|Filial - 000009|       22|
+|       88|Filial - 000088|       22|
+|       98|Filial - 000098|       22|
+|      118|Filial - 000118|       22|
+|      146|Filial - 000146|       22|
+|      223|Filial - 000223|       22|
+|      268|Filial - 000268|       22|
+|      353|Filial - 000353|       22|
+|      363|Filial - 000363|       22|
+|      372|Filial - 000372|       22|
+|      373|Filial - 000373|       22|
+|      417|Filial - 000417|       22|
+|      464|Filial - 000464|       22|
+|      470|Filial - 000470|       22|
+|      531|Filial - 000531|       22|
+|      538|Filial - 000538|       22|
+|      617|Filial - 000617|       22|
+|      620|Filial - 000620|       22|
+|      625|Filial - 000625|       22|
++---------+---------------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Tabela item\PYZus{}pedido}
+        \PY{n}{df\PYZus{}item\PYZus{}pedido} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                        SELECT *}
+        \PY{l+s+s2}{                        FROM desafio.item\PYZus{}pedido}
+        \PY{l+s+s2}{                        WHERE id\PYZus{}pedido != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                        ORDER BY vr\PYZus{}unitario DESC}
+        \PY{l+s+s2}{                        }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}item\PYZus{}pedido}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+----------+----------+-----------+
+| id\_pedido|ds\_produto|quantidade|vr\_unitario|
++----------+----------+----------+-----------+
+|5110435076|   3848054|         1|   66494.87|
+|5031966676|    335303|         1|   60884.07|
+|5063831906|    326104|         1|   34475.87|
+|5045535526|    326104|         1|   34475.87|
+|5145353926|    326104|         1|   33456.67|
+|5113285456|    303661|         1|   28716.87|
+|5095723126|    303661|         1|   28716.87|
+|4926217626|    340405|         1|   25969.97|
+|5073258626|    340405|         1|   18394.87|
+|4726298756|    311407|         1|   17409.47|
+|5092165926|     54702|         1|   15826.07|
+|5149125256|    286704|         1|   14487.07|
+|5145353926|    376637|         1|   14168.57|
+|5033024306|   4325751|         2|   12999.74|
+|4922148256|   2639878|         1|   12500.67|
+|5062260076|    300478|         1|   12365.47|
+|5061964676|    300478|         1|   12365.47|
+|5052910156|   1362075|         1|   11971.57|
+|4752135456|   1534588|         1|   11959.87|
+|5063883826|    270336|         1|   11863.67|
++----------+----------+----------+-----------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Tabela parceiro}
+        \PY{n}{df\PYZus{}parceiro} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                    SELECT *}
+        \PY{l+s+s2}{                    FROM desafio.parceiro}
+        \PY{l+s+s2}{                    WHERE id\PYZus{}parceiro != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}parceiro}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}parceiro}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+--------------------+
+|id\_parceiro|         nm\_parceiro|
++-----------+--------------------+
+|          1|Parceiro Magalu - 01|
+|          2|Parceiro Magalu - 02|
+|          3|Parceiro Magalu - 03|
+|          4|Parceiro Magalu - 04|
+|          5|Parceiro Magalu - 05|
+|          6|Parceiro Magalu - 06|
+|          7|Parceiro Magalu - 07|
+|          8|Parceiro Magalu - 08|
+|          9|Parceiro Magalu - 09|
+|         10|Parceiro Magalu - 10|
+|         11|Parceiro Magalu - 11|
+|         12|Parceiro Magalu - 12|
+|         13|Parceiro Magalu - 13|
+|         14|Parceiro Magalu - 14|
+|         15|Parceiro Magalu - 15|
+|         16|Parceiro Magalu - 16|
++-----------+--------------------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Tabela produtos}
+        \PY{n}{df\PYZus{}produtos} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{                    SELECT *}
+        \PY{l+s+s2}{                    FROM desafio.produtos}
+        \PY{l+s+s2}{                    WHERE id\PYZus{}produto != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}produto}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{                    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}produtos}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+--------------------+---------------+
+|id\_produto|          ds\_produto|id\_subcategoria|
++----------+--------------------+---------------+
+|     12006|Produto - 0000012006|            572|
+|     45183|Produto - 0000045183|           2142|
+|     78905|Produto - 0000078905|            140|
+|     79758|Produto - 0000079758|           3132|
+|    117196|Produto - 0000117196|             96|
+|    169903|Produto - 0000169903|           1735|
+|    185406|Produto - 0000185406|             82|
+|    201415|Produto - 0000201415|           1519|
+|    284396|Produto - 0000284396|           3132|
+|    293376|Produto - 0000293376|           1309|
+|    299033|Produto - 0000299033|            336|
+|    301419|Produto - 0000301419|           2370|
+|    312382|Produto - 0000312382|           1610|
+|    315401|Produto - 0000315401|           2880|
+|    316342|Produto - 0000316342|           1236|
+|    335667|Produto - 0000335667|           3228|
+|    344427|Produto - 0000344427|           2925|
+|    384651|Produto - 0000384651|           3132|
+|    384922|Produto - 0000384922|           2300|
+|    389046|Produto - 0000389046|            314|
++----------+--------------------+---------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Tabela subcategoria}
+         \PY{n}{df\PYZus{}subcategoria} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{                        SELECT *}
+         \PY{l+s+s2}{                        FROM desafio.subcategoria}
+         \PY{l+s+s2}{                        WHERE id\PYZus{}subcategoria != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}subcategoria}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{                        }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}subcategoria}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------------+--------------------+------------+
+|id\_subcategoria|     ds\_subcategoria|id\_categoria|
++---------------+--------------------+------------+
+|            132|Sub-categoria - 0{\ldots}|           1|
+|            137|Sub-categoria - 0{\ldots}|           1|
+|            288|Sub-categoria - 0{\ldots}|           1|
+|            380|Sub-categoria - 0{\ldots}|           1|
+|            397|Sub-categoria - 0{\ldots}|           1|
+|            498|Sub-categoria - 0{\ldots}|           1|
+|            508|Sub-categoria - 0{\ldots}|           1|
+|            514|Sub-categoria - 0{\ldots}|           1|
+|            586|Sub-categoria - 0{\ldots}|           1|
+|            668|Sub-categoria - 0{\ldots}|           1|
+|            751|Sub-categoria - 0{\ldots}|           1|
+|            923|Sub-categoria - 0{\ldots}|           1|
+|           1040|Sub-categoria - 0{\ldots}|           1|
+|           1170|Sub-categoria - 0{\ldots}|           1|
+|           1211|Sub-categoria - 0{\ldots}|           1|
+|           1426|Sub-categoria - 0{\ldots}|           1|
+|           1459|Sub-categoria - 0{\ldots}|           1|
+|           1466|Sub-categoria - 0{\ldots}|           1|
+|           1483|Sub-categoria - 0{\ldots}|           1|
+|           1486|Sub-categoria - 0{\ldots}|           1|
++---------------+--------------------+------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Tabela pedido}
+         \PY{n}{df\PYZus{}pedido} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{                    SELECT *}
+         \PY{l+s+s2}{                    FROM desafio.pedido}
+         \PY{l+s+s2}{                    WHERE id\PYZus{}pedido != }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{                    ORDER BY vr\PYZus{}total\PYZus{}pago DESC}
+         \PY{l+s+s2}{                    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}pedido}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+--------------------+-----------+----------+---------+-------------+
+|  id\_pedido|           dt\_pedido|id\_parceiro|id\_cliente|id\_filial|vr\_total\_pago|
++-----------+--------------------+-----------+----------+---------+-------------+
+|48013645016|2021-07-02T00:00:{\ldots}|         16|  58591422|      228|     124470.0|
+| 4818997673|2021-07-06T00:00:{\ldots}|          3|  38004395|        4|      98267.0|
+|49910739213|2021-08-12T00:00:{\ldots}|         13|   9321272|      257|      81783.0|
+| 4944110276|2021-08-02T00:00:{\ldots}|          6|  44584572|      231|      75387.0|
+|47907758013|2021-06-30T00:00:{\ldots}|         13|   7397225|      231|      70185.7|
+| 5110435076|2021-09-08T00:00:{\ldots}|          6| 146694647|        3|     66494.87|
+|47127533716|2021-06-12T00:00:{\ldots}|         16|  56298357|        3|     64069.12|
+| 5031966676|2021-08-20T00:00:{\ldots}|          6|  20580847|      329|     60884.07|
+|47769750516|2021-06-27T00:00:{\ldots}|         16|  58591422|      228|     59426.56|
+|46793901716|2021-06-05T00:00:{\ldots}|         16|  58591422|      257|      51998.7|
+| 4901534006|2021-07-23T00:00:{\ldots}|          6| 140434155|      430|      51491.7|
+| 4944186006|2021-08-02T00:00:{\ldots}|          6|  44584572|      231|     48247.68|
+| 5145353926|2021-09-14T00:00:{\ldots}|          6| 147269002|      342|     47625.24|
+| 4810162726|2021-07-05T00:00:{\ldots}|          6| 130331977|        3|      45370.0|
+| 5052648526|2021-08-25T00:00:{\ldots}|          6|  70849590|      228|     44087.68|
+| 4682084776|2021-06-06T00:00:{\ldots}|          6|  64507085|       99|      42887.0|
+|47908319213|2021-06-30T00:00:{\ldots}|         13|   7397225|      231|     39459.05|
+|49235898013|2021-07-28T00:00:{\ldots}|         13|   4182082|     1623|      38996.1|
+| 4991129556|2021-08-12T00:00:{\ldots}|          6|  35130592|      257|      38987.0|
+| 5078166606|2021-08-31T00:00:{\ldots}|          6|  84899772|      257|      36647.0|
++-----------+--------------------+-----------+----------+---------+-------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \subsubsection{02.Criar um dataframe (df\_pedidos) esta dataframe deve
+ser a união de pedido e
+item\_pedido;}\label{criar-um-dataframe-df_pedidos-esta-dataframe-deve-ser-a-uniuxe3o-de-pedido-e-item_pedido}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df\PYZus{}pedido}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}item\PYZus{}pedido}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{item\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{query} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{            P.*,}
+         \PY{l+s+s2}{            IP.ds\PYZus{}produto,}
+         \PY{l+s+s2}{            IP.quantidade,}
+         \PY{l+s+s2}{            IP.vr\PYZus{}unitario}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{            pedido as P}
+         \PY{l+s+s2}{        JOIN item\PYZus{}pedido AS IP}
+         \PY{l+s+s2}{        ON}
+         \PY{l+s+s2}{            P.id\PYZus{}pedido = IP.id\PYZus{}pedido}
+         \PY{l+s+s2}{        ORDER BY quantidade DESC}
+         \PY{l+s+s2}{        }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{df\PYZus{}pedidos} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{n}{query}\PY{p}{)}
+         \PY{n}{df\PYZus{}pedidos}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{df\PYZus{}pedidos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+--------------------+-----------+----------+---------+-------------+----------+----------+-----------+
+|  id\_pedido|           dt\_pedido|id\_parceiro|id\_cliente|id\_filial|vr\_total\_pago|ds\_produto|quantidade|vr\_unitario|
++-----------+--------------------+-----------+----------+---------+-------------+----------+----------+-----------+
+|49910739213|2021-08-12T00:00:{\ldots}|         13|   9321272|      257|      81783.0|   4900032|        30|     2726.1|
+|46980515513|2021-06-09T00:00:{\ldots}|         13|  34273805|      257|      25994.8|    947447|        20|    1299.74|
+|49201060213|2021-07-28T00:00:{\ldots}|         13|   4182082|       45|      11373.4|   4679659|        10|     909.87|
+|49442397513|2021-08-02T00:00:{\ldots}|         13|  10775562|      231|       1298.7|   1082672|        10|     129.87|
+|49096084213|2021-07-25T00:00:{\ldots}|         13| 121622115|        3|       5850.0|   3806899|        10|      585.0|
+|50278586216|2021-08-19T00:00:{\ldots}|         16|  12118877|      480|        778.7|   4623416|        10|      77.87|
+| 5030035725|2021-08-19T00:00:{\ldots}|          5|  30658822|     1584|       1547.0|   2858081|        10|      154.7|
+|48787804016|2021-07-19T00:00:{\ldots}|         16|  41971222|      489|       2858.7|   2812279|        10|     285.87|
+|48472525013|2021-07-12T00:00:{\ldots}|         13|   3548435|      231|      10398.7|   3795044|        10|    1039.87|
+| 4782742853|2021-06-28T00:00:{\ldots}|          3|  73645027|        3|      33007.0|    242439|        10|     3300.7|
+| 5031230276|2021-08-19T00:00:{\ldots}|          6| 140930910|        3|      16887.0|     84657|        10|     1688.7|
+| 4903468725|2021-07-24T00:00:{\ldots}|          5| 143012522|      257|        767.0|   1773048|        10|       76.7|
+| 4985531705|2021-08-11T00:00:{\ldots}|          5| 144468017|      276|       1157.0|   2174820|        10|      115.7|
+| 4863066605|2021-07-15T00:00:{\ldots}|          5|  32421995|        3|        507.0|     36314|        10|       50.7|
+| 5154428706|2021-09-16T00:00:{\ldots}|          6|    454657|        4|       1937.0|   4019717|        10|      193.7|
+| 5014644275|2021-08-17T00:00:{\ldots}|          5|  68429130|      329|       3237.0|   3924629|        10|      323.7|
+|47337283513|2021-06-17T00:00:{\ldots}|         13|  36510245|      257|     16924.69|   2510726|        10|    1689.87|
+|50595625513|2021-08-26T00:00:{\ldots}|         13| 122514555|        3|       7798.7|    900091|        10|     779.87|
+|47967789513|2021-07-01T00:00:{\ldots}|         13|  35803372|      231|       3898.7|   4974191|        10|     389.87|
+|48000315013|2021-07-02T00:00:{\ldots}|         13|  66925440|        4|      12998.7|   4627155|        10|    1299.87|
++-----------+--------------------+-----------+----------+---------+-------------+----------+----------+-----------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \paragraph{2.1.Ver a quantidade de
+pedidos?}\label{ver-a-quantidade-de-pedidos}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{qtd\PYZus{}pedidos} \PY{o}{=} \PY{n}{df\PYZus{}pedidos}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{distinct}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A quantidade de pedidos é de:}\PY{l+s+si}{\PYZob{}qtd\PYZus{}pedidos\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A quantidade de pedidos é de:733471
+
+    \end{Verbatim}
+
+    \paragraph{2.2.Quantidade de produtos e agrupa-los por
+pedido}\label{quantidade-de-produtos-e-agrupa-los-por-pedido}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{produtos\PYZus{}pedido} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos}
+                            \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                            \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quantidade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                                 \PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quantidade\PYZus{}produtos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                            \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quantidade\PYZus{}produtos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{produtos\PYZus{}pedido}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+-------------------+
+|  id\_pedido|quantidade\_produtos|
++-----------+-------------------+
+|49001989016|                 50|
+|48013645016|                 45|
+|48483039513|                 40|
+|47272431213|                 40|
+|48704946213|                 40|
+|48265171013|                 36|
+|47769750516|                 32|
+|50903766713|                 31|
+|47741988510|                 30|
+|51367310716|                 30|
+|48394480213|                 30|
+|48112853213|                 30|
+|49910739213|                 30|
+|48456340013|                 30|
+|48474595213|                 30|
+|46972298716|                 30|
+|49284138513|                 30|
+|48813362513|                 30|
+|49235898013|                 30|
+|50463604513|                 28|
++-----------+-------------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \paragraph{2.3.Quantidade de pedidos por
+cliente}\label{quantidade-de-pedidos-por-cliente}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{qtd\PYZus{}pedido\PYZus{}cliente} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos}
+                               \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}cliente}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                               \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{countDistinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                                    \PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}por\PYZus{}cliente}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                               \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}por\PYZus{}cliente}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{qtd\PYZus{}pedido\PYZus{}cliente}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+-------------------+
+|id\_cliente|pedidos\_por\_cliente|
++----------+-------------------+
+|  19912727|                182|
+| 133452557|                174|
+| 125627750|                120|
+|  13565460|                112|
+|  20325327|                 97|
+|  32115700|                 76|
+|  10344587|                 68|
+|   4806975|                 67|
+|   1501190|                 66|
+|  90954057|                 66|
+|  97294812|                 65|
+| 105584482|                 58|
+| 119699252|                 55|
+|  41453777|                 53|
+|  62353192|                 52|
+| 124140150|                 50|
+|  16352982|                 47|
+|  54170967|                 47|
+| 138871907|                 46|
+|  65586217|                 45|
++----------+-------------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \paragraph{2.4.Quantidade de pedidos por
+parceiro}\label{quantidade-de-pedidos-por-parceiro}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{qtd\PYZus{}pedido\PYZus{}parceiro} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos}
+                                \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}parceiro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                                \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{countDistinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                                     \PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}parceiro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                                \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}parceiro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{qtd\PYZus{}pedido\PYZus{}parceiro}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+----------------+
+|id\_parceiro|pedidos\_parceiro|
++-----------+----------------+
+|         16|          332413|
+|         13|          306170|
+|          6|           62142|
+|          5|           19193|
+|         10|            8822|
+|          3|            3408|
+|          1|             705|
+|         11|             446|
+|          4|              88|
+|          8|              44|
+|          2|              40|
++-----------+----------------+
+
+
+    \end{Verbatim}
+
+    \paragraph{2.5.Quantidade de pedido por
+filial}\label{quantidade-de-pedido-por-filial}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{qtd\PYZus{}pedido\PYZus{}filial} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos}
+                              \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                              \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{countDistinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                                   \PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                              \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{qtd\PYZus{}pedido\PYZus{}filial}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+--------------+
+|id\_filial|pedidos\_filial|
++---------+--------------+
+|      231|        204263|
+|        3|        181948|
+|      257|         19380|
+|      883|         15514|
+|      228|         14119|
+|      366|         12327|
+|      494|         12214|
+|      117|         11741|
+|      547|          9831|
+|     1680|          7995|
+|      276|          7376|
+|     1692|          7083|
+|      439|          7056|
+|      229|          6937|
+|      435|          6728|
+|        4|          6270|
+|      141|          5961|
+|      224|          5471|
+|      884|          5136|
+|     1730|          3728|
++---------+--------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \subsubsection{03.Juntar criar df\_filial que deverá ser a junção das
+tabelas filial, cidade e
+estado;}\label{juntar-criar-df_filial-que-deveruxe1-ser-a-junuxe7uxe3o-das-tabelas-filial-cidade-e-estado}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{df\PYZus{}filial}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}cidade}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cidade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}estado}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{query} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{            F.id\PYZus{}filial,}
+         \PY{l+s+s2}{            C.id\PYZus{}cidade,}
+         \PY{l+s+s2}{            E.id\PYZus{}estado,}
+         \PY{l+s+s2}{            F.ds\PYZus{}filial,}
+         \PY{l+s+s2}{            C.ds\PYZus{}cidade,}
+         \PY{l+s+s2}{            E.ds\PYZus{}estado}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{            filial AS F}
+         \PY{l+s+s2}{        JOIN}
+         \PY{l+s+s2}{            cidade AS C ON F.id\PYZus{}cidade = C.id\PYZus{}cidade}
+         \PY{l+s+s2}{        JOIN}
+         \PY{l+s+s2}{            estado AS E ON C.id\PYZus{}estado = E.id\PYZus{}estado}
+         \PY{l+s+s2}{        }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{df\PYZus{}filiais} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{n}{query}\PY{p}{)}
+         \PY{n}{df\PYZus{}filiais}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{df\PYZus{}filiais}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+---------+---------+---------------+-----------+---------+
+|id\_filial|id\_cidade|id\_estado|      ds\_filial|  ds\_cidade|ds\_estado|
++---------+---------+---------+---------------+-----------+---------+
+|      151|     7241|        2|Filial - 000151| UBERLANDIA|       AC|
+|     1514|       59|        3|Filial - 001514|AGUA BRANCA|       AL|
+|     1431|       59|        3|Filial - 001431|AGUA BRANCA|       AL|
+|     1423|       59|        3|Filial - 001423|AGUA BRANCA|       AL|
+|     1312|       59|        3|Filial - 001312|AGUA BRANCA|       AL|
+|     1063|       59|        3|Filial - 001063|AGUA BRANCA|       AL|
+|     1006|       59|        3|Filial - 001006|AGUA BRANCA|       AL|
+|      946|       59|        3|Filial - 000946|AGUA BRANCA|       AL|
+|      813|       59|        3|Filial - 000813|AGUA BRANCA|       AL|
+|      682|       59|        3|Filial - 000682|AGUA BRANCA|       AL|
+|      611|       59|        3|Filial - 000611|AGUA BRANCA|       AL|
+|      603|       59|        3|Filial - 000603|AGUA BRANCA|       AL|
+|      590|       59|        3|Filial - 000590|AGUA BRANCA|       AL|
+|      468|       59|        3|Filial - 000468|AGUA BRANCA|       AL|
+|      414|       59|        3|Filial - 000414|AGUA BRANCA|       AL|
+|       48|       59|        3|Filial - 000048|AGUA BRANCA|       AL|
+|     1553|      248|        3|Filial - 001553|     ANADIA|       AL|
+|     1387|      248|        3|Filial - 001387|     ANADIA|       AL|
+|     1238|      248|        3|Filial - 001238|     ANADIA|       AL|
+|      817|      248|        3|Filial - 000817|     ANADIA|       AL|
++---------+---------+---------+---------------+-----------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \paragraph{3.1.Juntar com o df\_pedidos}\label{juntar-com-o-df_pedidos}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df\PYZus{}pedidos}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}filiais}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{filiais}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{query} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{            P.*,}
+         \PY{l+s+s2}{            F.id\PYZus{}cidade,}
+         \PY{l+s+s2}{            F.id\PYZus{}estado,}
+         \PY{l+s+s2}{            F.ds\PYZus{}cidade,}
+         \PY{l+s+s2}{            F.ds\PYZus{}estado,}
+         \PY{l+s+s2}{            F.ds\PYZus{}filial}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{            pedidos AS P}
+         \PY{l+s+s2}{        JOIN}
+         \PY{l+s+s2}{            filiais AS F ON P.id\PYZus{}filial = F.id\PYZus{}filial}
+         \PY{l+s+s2}{        }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{df\PYZus{}pedidos\PYZus{}filiais} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{n}{query}\PY{p}{)}
+         \PY{n}{df\PYZus{}pedidos\PYZus{}filiais}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{truncate}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+---------+---------+----------------+---------+---------------+
+|id\_pedido  |dt\_pedido               |id\_parceiro|id\_cliente|id\_filial|vr\_total\_pago|ds\_produto|quantidade|vr\_unitario|id\_cidade|id\_estado|ds\_cidade       |ds\_estado|ds\_filial      |
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+---------+---------+----------------+---------+---------------+
+|48443031713|2021-07-12T00:00:00.000Z|13         |136800692 |1090     |129.99       |4335308   |1         |129.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48472409513|2021-07-12T00:00:00.000Z|13         |69267635  |1090     |259.99       |1375916   |1         |259.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48454600516|2021-07-12T00:00:00.000Z|16         |48611362  |1090     |38.99        |1087204   |1         |38.99      |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48474015213|2021-07-12T00:00:00.000Z|13         |110762017 |1090     |181.99       |3007703   |1         |181.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48433649513|2021-07-12T00:00:00.000Z|13         |114725005 |1090     |194.99       |2450167   |1         |194.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48469345716|2021-07-12T00:00:00.000Z|16         |64085032  |1090     |106.59       |866295    |1         |106.59     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48477626716|2021-07-13T00:00:00.000Z|16         |140176892 |1090     |131.23       |3429400   |1         |71.44      |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48477626716|2021-07-13T00:00:00.000Z|16         |140176892 |1090     |131.23       |4876008   |1         |59.79      |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48470836213|2021-07-12T00:00:00.000Z|13         |46721527  |1090     |389.98       |2120894   |1         |207.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48470836213|2021-07-12T00:00:00.000Z|13         |46721527  |1090     |389.98       |1869081   |1         |181.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48442153513|2021-07-12T00:00:00.000Z|13         |50397032  |1090     |45.49        |2780304   |1         |45.49      |737      |33       |BARUERI         |SP       |Filial - 001090|
+|48446389013|2021-07-12T00:00:00.000Z|13         |45217500  |1090     |103.99       |1160225   |1         |103.99     |737      |33       |BARUERI         |SP       |Filial - 001090|
+|49098483713|2021-07-25T00:00:00.000Z|13         |63531597  |1159     |71.49        |3190936   |1         |71.49      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49078822016|2021-07-25T00:00:00.000Z|16         |76511377  |1159     |90.99        |3134007   |1         |90.99      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49147908013|2021-07-26T00:00:00.000Z|13         |13997207  |1159     |259.99       |2380477   |1         |259.99     |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|4910176376 |2021-07-25T00:00:00.000Z|6          |54512730  |1159     |259.87       |287907    |1         |259.87     |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49073085016|2021-07-25T00:00:00.000Z|16         |28884510  |1159     |131.27       |678641    |1         |44.19      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49073085016|2021-07-25T00:00:00.000Z|16         |28884510  |1159     |131.27       |1867788   |1         |44.19      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49073085016|2021-07-25T00:00:00.000Z|16         |28884510  |1159     |131.27       |2899106   |1         |42.89      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
+|49074817016|2021-07-25T00:00:00.000Z|16         |4193435   |1159     |42.89        |2899106   |1         |42.89      |234      |6        |AMELIA RODRIGUES|BA       |Filial - 001159|
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+---------+---------+----------------+---------+---------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \paragraph{3.2.Ver a quantidade de pedidos por
+estado}\label{ver-a-quantidade-de-pedidos-por-estado}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{df\PYZus{}pedidos\PYZus{}por\PYZus{}estado} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos\PYZus{}filiais}
+                               \PY{o}{.}\PY{n}{groupBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ds\PYZus{}estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                               \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{countDistinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}pedido}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}por\PYZus{}estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                               \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pedidos\PYZus{}por\PYZus{}estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df\PYZus{}pedidos\PYZus{}por\PYZus{}estado}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{27}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+---------+------------------+
+|id\_estado|ds\_estado|pedidos\_por\_estado|
++---------+---------+------------------+
+|       14|       MG|            317571|
+|       18|       PA|            235021|
+|       11|       GO|             36273|
+|       20|       PE|             36204|
+|       31|       SC|             26252|
+|       33|       SP|             14683|
+|       13|       MA|             13833|
+|        6|       BA|             10541|
+|       28|       RS|              9024|
+|        7|       CE|              8042|
+|       22|       PR|              7315|
+|       25|       RN|              5419|
+|        3|       AL|              2822|
+|       10|       ES|              2308|
+|       32|       SE|              2202|
+|       19|       PB|              1992|
+|       21|       PI|              1213|
+|       24|       RJ|              1189|
+|       16|       MT|               675|
+|        8|       DF|               461|
+|       15|       MS|               270|
+|       35|       TO|               118|
+|       26|       RO|                39|
+|        4|       AM|                 3|
+|        2|       AC|                 1|
++---------+---------+------------------+
+
+
+    \end{Verbatim}
+
+    \paragraph{3.3.Top 10 filial que mais
+vendeu}\label{top-10-filial-que-mais-vendeu}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{df\PYZus{}vendas\PYZus{}por\PYZus{}filial} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}pedidos\PYZus{}filiais}
+                              \PY{o}{.}\PY{n}{groupBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ds\PYZus{}filial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                              \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quantidade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{volume\PYZus{}vendas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                              \PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{volume\PYZus{}vendas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df\PYZus{}vendas\PYZus{}por\PYZus{}filial}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++---------+---------------+-------------+
+|id\_filial|      ds\_filial|volume\_vendas|
++---------+---------------+-------------+
+|      231|Filial - 000231|       240806|
+|        3|Filial - 000003|       220768|
+|      257|Filial - 000257|        23725|
+|      883|Filial - 000883|        17717|
+|      228|Filial - 000228|        15851|
+|      366|Filial - 000366|        13735|
+|      494|Filial - 000494|        13461|
+|      117|Filial - 000117|        13459|
+|      547|Filial - 000547|        11169|
+|     1680|Filial - 001680|         9531|
++---------+---------------+-------------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \subsubsection{04.Criar o dataframe df\_stage juntando todas as bases do
+nosso modelo
+relacional}\label{criar-o-dataframe-df_stage-juntando-todas-as-bases-do-nosso-modelo-relacional}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}df\PYZus{}pedidos com df\PYZus{}item\PYZus{}pedido}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}pedido}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}item\PYZus{}pedido}\PY{p}{,} \PY{n}{df\PYZus{}pedido}\PY{o}{.}\PY{n}{id\PYZus{}pedido} \PY{o}{==} \PY{n}{df\PYZus{}item\PYZus{}pedido}\PY{o}{.}\PY{n}{id\PYZus{}pedido}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}item\PYZus{}pedido}\PY{o}{.}\PY{n}{id\PYZus{}pedido}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage com df\PYZus{}parceiro}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}parceiro}\PY{p}{,} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{id\PYZus{}parceiro} \PY{o}{==} \PY{n}{df\PYZus{}parceiro}\PY{o}{.}\PY{n}{id\PYZus{}parceiro}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}parceiro}\PY{o}{.}\PY{n}{id\PYZus{}parceiro}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage com df\PYZus{}cliente}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}clientes}\PY{p}{,} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{id\PYZus{}cliente} \PY{o}{==} \PY{n}{df\PYZus{}clientes}\PY{o}{.}\PY{n}{id\PYZus{}cliente}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}clientes}\PY{o}{.}\PY{n}{id\PYZus{}cliente}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage com df\PYZus{}filial}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}filial}\PY{p}{,} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{id\PYZus{}filial} \PY{o}{==} \PY{n}{df\PYZus{}filial}\PY{o}{.}\PY{n}{id\PYZus{}filial}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}filial}\PY{o}{.}\PY{n}{id\PYZus{}filial}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage com df\PYZus{}cidade}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}cidade}\PY{p}{,} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{id\PYZus{}cidade} \PY{o}{==} \PY{n}{df\PYZus{}cidade}\PY{o}{.}\PY{n}{id\PYZus{}cidade}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}cidade}\PY{o}{.}\PY{n}{id\PYZus{}cidade}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage com df\PYZus{}estado}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}estado}\PY{p}{,} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{id\PYZus{}estado} \PY{o}{==} \PY{n}{df\PYZus{}estado}\PY{o}{.}\PY{n}{id\PYZus{}estado}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}stage} \PY{o}{=} \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{df\PYZus{}estado}\PY{o}{.}\PY{n}{id\PYZus{}estado}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} df\PYZus{}stage com df\PYZus{}produtos}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.join(df\PYZus{}produtos, df\PYZus{}stage.ds\PYZus{}produto == df\PYZus{}produtos.ds\PYZus{}produto, \PYZsq{}left\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.drop(df\PYZus{}produtos.ds\PYZus{}produto)}
+         
+         \PY{c+c1}{\PYZsh{} df\PYZus{}stage com df\PYZus{}subcategoria}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.join(df\PYZus{}subcategoria, df\PYZus{}stage.id\PYZus{}subcategoria == df\PYZus{}subcategoria.id\PYZus{}subcategoria, \PYZsq{}left\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.drop(df\PYZus{}subcategoria.id\PYZus{}subcategoria)}
+         
+         \PY{c+c1}{\PYZsh{} df\PYZus{}stage com df\PYZus{}categorias}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.join(df\PYZus{}categorias, df\PYZus{}stage.id\PYZus{}categoria == df\PYZus{}categorias.id\PYZus{}categoria, \PYZsq{}left\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}df\PYZus{}stage = df\PYZus{}stage.drop(df\PYZus{}categorias.id\PYZus{}categoria)}
+         
+         \PY{c+c1}{\PYZsh{}show}
+         \PY{n}{df\PYZus{}stage}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{truncate}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+--------------------+---------------------------+---------+---------------+---------+---------------+---------+---------+
+|id\_pedido  |dt\_pedido               |id\_parceiro|id\_cliente|id\_filial|vr\_total\_pago|ds\_produto|quantidade|vr\_unitario|nm\_parceiro         |nm\_cliente                 |flag\_ouro|ds\_filial      |id\_cidade|ds\_cidade      |id\_estado|ds\_estado|
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+--------------------+---------------------------+---------+---------------+---------+---------------+---------+---------+
+|49523668016|2021-08-03T00:00:00.000Z|16         |100041455 |231      |64.99        |2548610   |1         |64.99      |Parceiro Magalu - 16|Cliente Magalu - 0100041455|0        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|48347149016|2021-07-09T00:00:00.000Z|16         |100194305 |3        |55.89        |1207789   |1         |55.89      |Parceiro Magalu - 16|Cliente Magalu - 0100194305|0        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|47109143513|2021-06-12T00:00:00.000Z|13         |100220472 |94       |155.99       |4538653   |1         |155.99     |Parceiro Magalu - 13|Cliente Magalu - 0100220472|0        |Filial - 000094|3        |ABADIA DE GOIAS|11       |GO       |
+|47109807213|2021-06-12T00:00:00.000Z|13         |100220472 |94       |77.99        |3722834   |1         |77.99      |Parceiro Magalu - 13|Cliente Magalu - 0100220472|0        |Filial - 000094|3        |ABADIA DE GOIAS|11       |GO       |
+|47230296513|2021-06-15T00:00:00.000Z|13         |100245497 |494      |454.99       |790103    |1         |454.99     |Parceiro Magalu - 13|Cliente Magalu - 0100245497|0        |Filial - 000494|6        |ABAETE         |14       |MG       |
+|49841149016|2021-08-11T00:00:00.000Z|16         |100294545 |3        |53.29        |2393919   |1         |53.29      |Parceiro Magalu - 16|Cliente Magalu - 0100294545|1        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|49063943013|2021-07-24T00:00:00.000Z|13         |10034090  |231      |84.49        |3618356   |1         |84.49      |Parceiro Magalu - 13|Cliente Magalu - 0010034090|0        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|49024430213|2021-07-23T00:00:00.000Z|13         |100632917 |231      |77.99        |1440590   |1         |77.99      |Parceiro Magalu - 13|Cliente Magalu - 0100632917|0        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|48293426513|2021-07-08T00:00:00.000Z|13         |100632917 |231      |103.99       |3107743   |1         |103.99     |Parceiro Magalu - 13|Cliente Magalu - 0100632917|0        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|50690320216|2021-08-29T00:00:00.000Z|16         |10075870  |224      |233.99       |4915226   |1         |233.99     |Parceiro Magalu - 16|Cliente Magalu - 0010075870|0        |Filial - 000224|6        |ABAETE         |14       |MG       |
+|49732277013|2021-08-08T00:00:00.000Z|13         |10080455  |3        |363.99       |3767837   |1         |363.99     |Parceiro Magalu - 13|Cliente Magalu - 0010080455|1        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|48599173216|2021-07-15T00:00:00.000Z|16         |10086262  |3        |168.99       |1596770   |1         |168.99     |Parceiro Magalu - 16|Cliente Magalu - 0010086262|1        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|49568219013|2021-08-04T00:00:00.000Z|13         |100923845 |3        |558.97       |4128836   |1         |220.99     |Parceiro Magalu - 13|Cliente Magalu - 0100923845|0        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|49568219013|2021-08-04T00:00:00.000Z|13         |100923845 |3        |558.97       |2392161   |1         |168.99     |Parceiro Magalu - 13|Cliente Magalu - 0100923845|0        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|49568219013|2021-08-04T00:00:00.000Z|13         |100923845 |3        |558.97       |2361244   |1         |168.99     |Parceiro Magalu - 13|Cliente Magalu - 0100923845|0        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|46918303513|2021-06-08T00:00:00.000Z|13         |100958260 |231      |194.99       |4006221   |1         |194.99     |Parceiro Magalu - 13|Cliente Magalu - 0100958260|1        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|49523386513|2021-08-03T00:00:00.000Z|13         |10099437  |3        |194.99       |2297136   |1         |194.99     |Parceiro Magalu - 13|Cliente Magalu - 0010099437|0        |Filial - 000003|1        |(BARCARENA)    |18       |PA       |
+|4814044926 |2021-07-05T00:00:00.000Z|6          |101027800 |231      |383.37       |928359    |1         |383.37     |Parceiro Magalu - 06|Cliente Magalu - 0101027800|1        |Filial - 000231|2        |(LEOPOLDINA)   |14       |MG       |
+|4776492076 |2021-06-27T00:00:00.000Z|6          |101089040 |364      |64.87        |53654     |1         |64.87      |Parceiro Magalu - 06|Cliente Magalu - 0101089040|0        |Filial - 000364|16       |ABELARDO LUZ   |31       |SC       |
+|47578572216|2021-06-23T00:00:00.000Z|16         |101169430 |980      |116.99       |1213357   |1         |116.99     |Parceiro Magalu - 16|Cliente Magalu - 0101169430|0        |Filial - 000980|298      |ANTONINA       |22       |PR       |
++-----------+------------------------+-----------+----------+---------+-------------+----------+----------+-----------+--------------------+---------------------------+---------+---------------+---------+---------------+---------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
